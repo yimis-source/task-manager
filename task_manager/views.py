@@ -22,6 +22,6 @@ def task_detail(request, task):
 def about(request):
     return render(request, "about.html")
 
-def ceate_task(request):
+def create_task(request):
     return render(request, "create_task.html")
 
