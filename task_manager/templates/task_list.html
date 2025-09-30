@@ -1,0 +1,24 @@
+{% extends 'layout/base.html' %} {% block content %}
+<h1>lista de tareas</h1>
+
+{% for task in tasks %}
+<div>
+  <h2>ID:{{task.id}}</h2>
+
+  <h3>Titulo: {{task.title}}</h3>
+  <p>descripcion: {{task.description}}</p>
+
+  {% if condition %}
+  <p>la tarea esta completa</p>
+
+  {% else %}
+  <p>la tarea no esta completa</p>
+  <button>✓</button>
+
+  {% endif %}
+</div>
+
+{% endfor %}
+<p>Estas son todas las tareas que has creado hasta ahora.</p>
+
+{% endblock %}
