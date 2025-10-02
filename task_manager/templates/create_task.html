@@ -1,7 +1,12 @@
-{% extends 'layout/base2.html' %}
+{% extends 'layout/base2.html' %} 
 
 {% block content %}
 
 <h1>crea una nueva tarea</h1>
-    
+<form method="POST" type="submit">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Crear</button>
+</form>
+
 {% endblock %}

@@ -1,6 +1,8 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404
+from datetime import date
+from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.http import JsonResponse
 from .models import Task
+from .forms import crete_new_taskForm
 
 
 def index(request):
@@ -22,6 +24,19 @@ def task_detail(request, task):
 def about(request):
     return render(request, "about.html")
 
-def create_task(request):
-    return render(request, "create_task.html")
 
+def create_task(request):
+    if request.method == "POST":
+        title = request.POST["title"]
+        description = request.POST["description"]
+
+        year = int(request.POST["due_date_year"])
+        month = int(request.POST["due_date_month"])
+        day = int(request.POST["due_date_day"])
+        due_date = date(year, month, day)
+
+        Task.objects.create(title=title, description=description, due_date=due_date)
+
+        return redirect("/tasks/")
+    elif request.method == "GET":
+        return render(request, "create_task.html", {"form": crete_new_taskForm()})
